@@ -73,5 +73,5 @@ cylinder_mesh = cylinder_mesh.rotate(rotation, center=[0,0,0])
 cylinder_mesh = cylinder_mesh.translate(center)
 
 # Plot some combination of meshes and point clouds.
-o3d.visualization.draw_geometries([pyransac_plane_pcloud, cylinder_pcloud])
-# o3d.visualization.draw_geometries([pyransac_plane_pcloud, cylinder_mesh])
+# o3d.visualization.draw_geometries([pyransac_plane_pcloud, cylinder_pcloud])
+o3d.visualization.draw_geometries([pyransac_plane_pcloud, cylinder_mesh])

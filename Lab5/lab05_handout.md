@@ -50,8 +50,22 @@ Note that the primary point of this example is to demonstrate generating data fo
 
 ### To do:
 - Run `bash yolo.sh`. This takes care of all the setup required, and starts the training process. 
-- While the training is running, open a terminal window in the PyTorch-YOLOv3 directory and run `tensorboard --logdir='logs'-port=6006` in the terminal. Then navigate to `localhost:6006` in your browser to see live statistics on the current state of the network as it is being trained.
-- If you're so inclined, you can download some images of playing cards into the `data/samples` directory in the PyTorch-YOLOv3 repository and run `python3 detect.py --image_folder data/samples --weights_path ./checkpoints/yolov3_ckpt_900.pth --model_def config/yolov3-custom.cfg --class_path data/custom/classes.names` from the git repository. This will run inference, putting the processed images into the "output" directory.
+- While the training is running, open a terminal window in the PyTorch-YOLOv3 directory and run `tensorboard --logdir='logs' --port=6006` in the terminal. Then navigate to `localhost:6006` in your browser to see live statistics on the current state of the network as it is being trained.
+
+- If you're so inclined, you can download some images of playing cards into the `data/samples` directory in the PyTorch-YOLOv3 repository
+- From there activate the pytorchyolo enviroment we just installed 
+- Note: {usercode} is your usercode, eg: abc12
+`source /csse/users/{usercode}/.cache/pypoetry/virtualenvs/pytorchyolo-47pnenGW-py3.8/bin/activate`
+
+- By default the yolo.sh script only trains for 10 epochs, which is not enough for accurate detections, and thus do not get displayed due to low confidence.
+- To view these predictions we can reduce the confidence threshold requirements with the following line.
+`python3 detect.py --images data/samples --weights ./checkpoints/yolov3_ckpt_10.pth --model config/yolov3-custom.cfg --classes data/custom/classes.names --conf_thres 0.01 --nms_thresh 0.01`
+
+- If you would like to see this working accuractly the following line will train for 100 epochs (this will take ~1 hour on a lab pc).
+`python3 train.py --model config/yolov3-custom.cfg --data config/custom.data  --pretrained_weights weights/darknet53.conv.74 --checkpoint_interval=10 --epochs=100`
+
+- And run detection.py with yolov3_ckpt_100.pth
+`python3 detect.py --images data/samples --weights ./checkpoints/yolov3_ckpt_100.pth --model config/yolov3-custom.cfg --classes data/custom/classes.names`
 
 ### Some Notes on train.py for the Curious
 - The `--checkpoint_interval` flag defaults to an interval of 1, after which it generates a ~250MB copy of the neural network. It's probably worth making this number larger for the sake of your hard drive. The yolo.sh script uses a checkpoint_interval of 10.
