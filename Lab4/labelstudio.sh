@@ -10,6 +10,8 @@ then
     python -m pip install label-studio
     python -m pip install torch torchvision
     python -m pip install label-studio-ml
+    python -m pip install jinja==3.0.3
+    python -m pip install flask==2.0.3
 else
     source "labelstudio-env/bin/activate"
 fi
