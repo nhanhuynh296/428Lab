@@ -5,8 +5,7 @@ if [ -z "$(pip3 list | grep detectron2)" ]
 then
     # Depending on the version of CUDA/PyTorch, you may need to change this command.
     # There is a table in the Git repo outlining which version to use: https://github.com/facebookresearch/detectron2/blob/master/INSTALL.md
-    python3 -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu113/torch1.10/index.html
-
+    python3 -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu110/torch1.6/index.html
 fi
 
 if [ ! -d detectron2 ]
